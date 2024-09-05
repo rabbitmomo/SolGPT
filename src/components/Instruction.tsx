@@ -23,7 +23,7 @@ const Instruction: FC = () => {
       {/* Headings container */}
       <div className="text-center px-4 text-black mb-[0px]"> {/* Text color set to black */}
         <h1 className="text-4xl font-bold mb-0 text-black italic font-mono">
-          "Hey SolGPT, could you help me to create 1000 Meow token"
+          &quot;Hey SolGPT, could you help me to create 1000 Meow token&quot;
         </h1>
         <p className="text-2xl text-black mt-[25px]">
           You can add the details of Token name, symbol, supply, decimals, and a JSON file URL that contains Image URL like <br />
