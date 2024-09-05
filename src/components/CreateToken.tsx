@@ -32,13 +32,13 @@ export const CreateToken: FC = () => {
 
   const onClick = useCallback(async () => {
     try {
-      // Step 1: Analyze the input using GPT-3.5 Turbo
+      // Step 1: Analyze the input using GPT-4
       const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-        model: "gpt-3.5-turbo",
+        model: "gpt-4",  // Update to use GPT-4
         messages: [
           {
             role: "user",
-            content: `Extract the following details from this sentence: "${inputValue}". Provide them in a JSON object with the keys: TokenName, Symbol, Amount, MetadataUrl, Decimals.`
+            content: `Extract the following details from this sentence: "${inputValue}". Provide them in a JSON object with the keys: TokenName, Symbol, Amount, MetadataUrl, Decimals. If a value is missing, use the default values: TokenName="Token", Symbol="SYM", Amount=1000, MetadataUrl="https://www.example.com/metadata.json", Decimals=5.`
           }
         ],
         max_tokens: 500,
@@ -49,28 +49,35 @@ export const CreateToken: FC = () => {
           'Content-Type': 'application/json',
         },
       });
-
-      // Parse the response from GPT-3.5 Turbo
-      const extractedDetails = JSON.parse(response.data.choices[0].message.content.trim());
-
+  
+      // Parse the response from GPT-4
+      let extractedDetails;
+      try {
+        extractedDetails = JSON.parse(response.data.choices[0].message.content.trim());
+      } catch (parseError) {
+        throw new Error('Error parsing response: ' + parseError.message);
+      }
+  
       // Step 2: Set default values if necessary
       const TokenName = extractedDetails.TokenName || "Token";
       const Symbol = extractedDetails.Symbol || "SYM";
-      var Amount = Number(extractedDetails.Amount) || 1000;
+      const Amount = Number(extractedDetails.Amount) || 1000;
       const MetadataUrl = extractedDetails.MetadataUrl || "https://www.example.com/metadata.json";
-      var Decimals = Number(extractedDetails.Decimals) || 5;
-
+      const Decimals = Number(extractedDetails.Decimals) || 5;
+  
+      // Ensure Amount and Decimals are valid numbers
       if (isNaN(Amount)) {
-        Amount=1000;
-      }else if(isNaN(Decimals)){
-        Decimals=5;
+        Amount = 1000;
       }
-
+      if (isNaN(Decimals)) {
+        Decimals = 5;
+      }
+  
       // Step 3: Proceed with token creation
       const lamports = await getMinimumBalanceForRentExemptMint(connection);
       const mintKeypair = Keypair.generate();
       const tokenATA = await getAssociatedTokenAddress(mintKeypair.publicKey, publicKey);
-
+  
       const createMetadataInstruction = createCreateMetadataAccountV3Instruction(
         {
           metadata: PublicKey.findProgramAddressSync(
@@ -102,7 +109,7 @@ export const CreateToken: FC = () => {
           },
         }
       );
-
+  
       const amountWithDecimals = BigInt(Amount * Math.pow(10, Decimals));
       const createNewTokenTransaction = new Transaction().add(
         SystemProgram.createAccount({
@@ -123,20 +130,18 @@ export const CreateToken: FC = () => {
         createMintToInstruction(mintKeypair.publicKey, tokenATA, publicKey, amountWithDecimals),
         createMetadataInstruction
       );
-
+  
       await sendTransaction(createNewTokenTransaction, connection, { signers: [mintKeypair] });
-
+  
       // Display the token's mint address in the success alert
-      // alert(`Token Created Successfully! Token Address: ${mintKeypair.publicKey.toBase58()}`);
-      notify({ type: 'success', message: `Token Created Successfully! Token Address: ${mintKeypair.publicKey.toBase58()}`});
-
+      notify({ type: 'success', message: `Token Created Successfully! Token Address: ${mintKeypair.publicKey.toBase58()}` });
+  
     } catch (error) {
       console.error('Error creating token:', error.message);
-      // alert(`There was an error creating the token: ${error.message}`);
-      notify({ type: 'error', message: `Token Created Failed, There was an error creating the token: ${error.message}`});
+      notify({ type: 'error', message: `Token Creation Failed, There was an error creating the token: ${error.message}` });
     }
   }, [inputValue, publicKey, connection, sendTransaction]);
-
+  
   return (
     <div className="my-6">
       <div className="typewriter-container mb-8">

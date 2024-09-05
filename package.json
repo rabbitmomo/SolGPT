@@ -34,8 +34,8 @@
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^9.0.0",
     "querystring-es3": "^0.2.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "zustand": "^3.6.9"
