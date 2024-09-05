@@ -61,15 +61,15 @@ export const CreateToken: FC = () => {
       // Step 2: Set default values if necessary
       const TokenName = extractedDetails.TokenName || "Token";
       const Symbol = extractedDetails.Symbol || "SYM";
-      const Amount = Number(extractedDetails.Amount) || 1000;
+      let Amount = Number(extractedDetails.Amount) || 1000;
       const MetadataUrl = extractedDetails.MetadataUrl || "https://www.example.com/metadata.json";
-      const Decimals = Number(extractedDetails.Decimals) || 5;
+      let Decimals = Number(extractedDetails.Decimals) || 5;
   
       // Ensure Amount and Decimals are valid numbers
       if (isNaN(Amount)) {
         Amount = 1000;
       }
-      if (isNaN(Decimals)) {
+      if (isNaN(Decimals)||Decimals>9) {
         Decimals = 5;
       }
   
