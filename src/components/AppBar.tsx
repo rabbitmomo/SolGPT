@@ -17,10 +17,10 @@ export const AppBar: FC = (props) => {
         <div className="navbar-start">
           <div className={`hidden sm:inline w-22 h-22 pt-2 ml-3`}>
           <Image
-            src="/solgptlogo.png" // Ensure this path is relative to the public folder
+            src="/solgptlogo.png" 
             alt="solgptlogo Image"
-            width={170}  // Adjust width as needed
-            height={40} // Adjust height as needed
+            width={170}  
+            height={40} 
           />  
           </div>
         </div>

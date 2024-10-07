@@ -5,11 +5,11 @@ const About: FC = () => {
   return (
     <div className="fullSize">
       <Image
-        src="/Solanabackground3.jpg" // Ensure this path is relative to the public folder
+        src="/Solanabackground3.jpg" 
         alt="Background Image"
         className="backgroundImage"
-        layout="fill" // 'fill' makes the image cover the container
-        objectFit="cover" // Ensures the image covers the area without stretching
+        layout="fill" 
+        objectFit="cover" 
         draggable={false}
       />
       <div className="textOverlay">

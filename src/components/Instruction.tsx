@@ -10,18 +10,18 @@ const Instruction: FC = () => {
       {/* Image container */}
       <div className="flex justify-center mb-[20px]">
         <Image
-          src="/InstructionImg.png" // Ensure this path is relative to the public folder
+          src="/InstructionImg.png" 
           alt="Instruction Image"
-          layout="intrinsic" // Preserve the intrinsic dimensions of the image
-          width={800} // Adjust width as needed
-          height={350} // Adjust height as needed
-          objectFit="contain" // Ensures the image is contained within the container
+          layout="intrinsic" 
+          width={800}
+          height={350} 
+          objectFit="contain" 
           draggable={false}
         />
       </div>
 
       {/* Headings container */}
-      <div className="text-center px-4 text-black mb-[0px]"> {/* Text color set to black */}
+      <div className="text-center px-4 text-black mb-[0px]"> 
         <h1 className="text-4xl font-bold mb-0 text-black italic font-mono">
           &quot;Hey SolGPT, could you help me to mint 1000 Meow token&quot;
         </h1>
