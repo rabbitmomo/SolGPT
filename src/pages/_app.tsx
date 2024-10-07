@@ -5,7 +5,6 @@ import { ContextProvider } from '../contexts/ContextProvider';
 import { AppBar } from '../components/AppBar';
 import { ContentContainer } from '../components/ContentContainer';
 import { Footer } from '../components/Footer';
-import Image from 'next/image';
 import Notifications from '../components/Notification'
 import About from 'components/About';
 import Instruction from 'components/Instruction';

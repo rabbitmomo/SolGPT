@@ -40,13 +40,7 @@ export const HomeView: FC = () => {
       {/* Content */}
       <div className="relative z-10 flex justify-center items-center h-full">
         <div className="md:hero mx-auto p-4">
-          <div className="md:hero-content flex flex-col text-center">
-            <RequestAirdrop />
-            {wallet && (
-              <p className="text-white mt-0">
-                SOL Balance: {(balance || 0).toLocaleString()}
-              </p>
-            )}
+          <div className="md:hero-content flex flex-col text-center">  
             <CreateToken />
           </div>
         </div>
