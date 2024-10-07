@@ -62,7 +62,7 @@ const Notification = ({ type, message, description, txid, onHide }) => {
 
   return (
     <div
-      className={`max-w-lg w-full bg-white shadow-lg rounded-md mt-2 pointer-events-auto ring-1 ring-black ring-opacity-5 p-2 mx-auto mt-12 overflow-hidden opacity-70`}
+      className={`max-w-lg w-full bg-white shadow-lg rounded-md mt-2 pointer-events-auto ring-1 ring-black ring-opacity-5 p-2 mx-auto mt-16 overflow-hidden opacity-70`}
     >
       <div className={`p-4`}>
         <div className={`flex items-center text-center`}>
