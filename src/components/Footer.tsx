@@ -23,7 +23,7 @@ export const Footer: FC = () => {
         </a>
 
         <a
-          href="https://www.youtube.com/watch?v=vc0NeFbobfk"
+          href="https://www.youtube.com/watch?v=3bIYU5kzdnQ"
           target="_blank"
           rel="noopener noreferrer"
         >
